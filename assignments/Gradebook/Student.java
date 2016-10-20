@@ -72,9 +72,14 @@ public void submitGrade(int g, int c) {
 public void submitGrade(Double g, int c) {
 	int q_score = (int) (g * c);
 	int qscore_total = 0;
-	qscore_total += q_score;	
-	this.GPA = (double) (qscore_total / credits);
-	Math.rint(this.GPA);
+	qscore_total += q_score;
+	if (c > 0) {
+		this.GPA = (double) (qscore_total / credits);
+		Math.rint(this.GPA);
+	}
+	if (c <= 0) {
+		this.GPA = 0.0;
+	}
 }
 
 public Student(Student one, Student two) {
@@ -114,7 +119,7 @@ public Student createLegacy (Student one){
 }
 
 public String toString(){
-	String ID = (String) stuID;
+	String ID = "" + stuID;
 	return this.lname + "," + " " + this.fname + " " + ID;
 }
 

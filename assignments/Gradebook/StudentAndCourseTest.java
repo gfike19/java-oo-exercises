@@ -1,3 +1,4 @@
+package Gradebook;
 import org.junit.Test;
 
 import junit.framework.TestCase;
