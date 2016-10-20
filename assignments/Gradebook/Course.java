@@ -1,3 +1,4 @@
+package Gradebook;
 import java.util.ArrayList;
 
 public class Course {
@@ -21,7 +22,6 @@ public class Course {
 			String s_name = s.getName();
 			if(!temp_name.equalsIgnoreCase(s_name)) {
 				roster.add(s);
-				rem_seats += 1;
 			}
 		}
 		return true;

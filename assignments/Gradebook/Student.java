@@ -1,3 +1,4 @@
+package Gradebook;
 import java.lang.Math;
 import java.util.ArrayList;
 
@@ -71,14 +72,9 @@ public void submitGrade(int g, int c) {
 public void submitGrade(Double g, int c) {
 	int q_score = (int) (g * c);
 	int qscore_total = 0;
-	qscore_total += q_score;
-	if (c > 0) {
-		this.GPA = (double) (qscore_total / credits);
-		Math.rint(this.GPA);
-	}
-	if (c <= 0) {
-		this.GPA = 0.0;
-	}
+	qscore_total += q_score;	
+	this.GPA = (double) (qscore_total / credits);
+	Math.rint(this.GPA);
 }
 
 public Student(Student one, Student two) {
@@ -118,7 +114,7 @@ public Student createLegacy (Student one){
 }
 
 public String toString(){
-	String ID = "" + stuID;
+	String ID = (String) stuID;
 	return this.lname + "," + " " + this.fname + " " + ID;
 }
 
