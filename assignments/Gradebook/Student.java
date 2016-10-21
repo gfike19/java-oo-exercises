@@ -1,7 +1,6 @@
 package Gradebook;
 
 import java.lang.Math;
-import java.util.ArrayList;
 
 public class Student {
 	private String fname;
@@ -9,14 +8,15 @@ public class Student {
 	private int stuID;
 	private int credits;
 	private Double GPA;
-	private String name;
+//	private String name;
 
 	public Student(String fname, String lname, int stuID) {
 		this.fname = fname;
 		this.lname = lname;
 		this.stuID = stuID;
-		this.name = fname + lname;
-		// this.credits = credits;
+//		this.name = fname + lname;
+		 this.credits = 0;
+		 this.GPA = 0.0;
 	}
 
 	public String getName(String fname, String lname) {
@@ -28,11 +28,11 @@ public class Student {
 		return this.fname + " " + this.lname;
 	}
 
-	public void settName(String name) {
-		String name_lst[] = name.split(" ");
-		this.fname = name_lst[0];
-		this.lname = name_lst[1];
-	}
+//	public void settName(String name) {
+//		String name_lst[] = name.split(" ");
+//		this.fname = name_lst[0];
+//		this.lname = name_lst[1];
+//	}
 
 	public int getStudentID() {
 		return this.stuID;
@@ -49,7 +49,7 @@ public class Student {
 	public String getClassStanding() {
 		String standing = "";
 		if (credits < 30) {
-			standing = "Freshmen";
+			standing = "Freshman";
 		} else if (credits >= 30 && credits < 60) {
 			standing = "Sophomore";
 		} else if (credits >= 60 && credits < 90) {
@@ -60,28 +60,14 @@ public class Student {
 		return standing;
 	}
 
-	public void submitGrade(int g, int c) {
-		int q_score = (int) (g * c);
-		int qscore_total = 0;
-		qscore_total += q_score;
-		if (c > 0) {
-			this.GPA = (double) (qscore_total / c);
-		}
-		if (c <= 0) {
-			this.GPA = 0.0;
-		}
-	}
 
-	public void submitGrade(Double g, int c) {
-		int q_score = (int) (g * c);
-		int qscore_total = 0;
-		qscore_total += q_score;
-		if (c > 0) {
-			this.GPA = (double) (qscore_total / c);
-		}
-		if (c <= 0) {
-			this.GPA = 0.0;
-		}
+	public void submitGrade(double g, int c) {
+		double q_score = g * c;
+		double qscore_total = (this.GPA * credits);
+		qscore_total +=  q_score;
+		this.credits += c;
+		this.GPA = (double) (qscore_total / this.credits);
+		this.GPA = Math.round(this.GPA * 1000) / 1000.0;
 	}
 
 	public Student(Student one, Student two) {
@@ -96,12 +82,6 @@ public class Student {
 		}
 	}
 
-	// public Student(Student one) {
-	// this.fname = one.getName();
-	// this.stuID = one.getStudentID();
-	// this.GPA = one.getGPA();
-	// this.credits = one.getCredits();
-	// }
 
 	public Double computeTuition() {
 		int credits = getCredits();
@@ -114,11 +94,6 @@ public class Student {
 		Student child = new Student(one, two);
 		return child;
 	}
-
-	// public Student createLegacy (Student one){
-	// Student child = new Student(one);
-	// return child;
-	// }
 
 	public String toString() {
 		String ID = "" + stuID;
