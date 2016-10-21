@@ -73,11 +73,13 @@ public class Student {
 		}
 	}
 
-	public Double computeTuition() {
-		double tution = this.credits * 1333.33;
-		tution = Math.round(tution * 1000) / 1000.0;
-		return tution;
-	}
+    public double computeTuition() {
+        int num_sem = credits / 15; //since a full semester is 20k
+        int extra_cred = credits % 15;
+        double tuition = num_sem * 20000;
+        tuition += (int)(1333.33 * extra_cred * 100) / 100.0;
+        return tuition;
+    }
 
 	public Student createLegacy(Student one, Student two) {
 		Student child = new Student(one, two);
