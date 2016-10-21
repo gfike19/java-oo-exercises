@@ -11,18 +11,22 @@ public class Course {
 	public Course (String name, int credits, int cnum) {
 		this.name = name;
 		this.credits = credits;
-		this.rem_seats = rem_seats;
-		this.roster = roster;
+//		this.rem_seats = rem_seats;
+//		this.roster = roster;
 		this.cnum = cnum;
+		rem_seats = 0;
 	}
 	
 	public Boolean addStudent(Student s) {
+		if (rem_seats == 0){
+			return false;
+		}
 		for(Student temp : roster) {
 			String temp_name = temp.getName();
 			String s_name = s.getName();
 			if(!temp_name.equalsIgnoreCase(s_name)) {
 				roster.add(s);
-				rem_seats += 1;
+				rem_seats -= 1;
 			}
 		}
 		return true;
@@ -51,16 +55,15 @@ public class Course {
 	
 	public String toString() {
 		String course_num = "" + cnum;
-		String c = "" + credits;
-		return course_num + " " + c;
+		return this.name + " " + course_num;
+	}
+	
+	public void setRemainingSeats(int rem_seats){
+		this.rem_seats = rem_seats;
 	}
 	
 	public int getRemainingSeats(){
-		int i = 0;
-		for(Student s : roster) {
-			i ++;
-		}
-		return i;
+		return this.rem_seats;
 	}
 	
 	public String getName(){
