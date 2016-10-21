@@ -62,14 +62,14 @@ public class Student {
 	}
 
 	public Student(Student one, Student two) {
-		this.fname = one.getName();
-		this.lname = two.getName();
-		this.stuID = one.getStudentID() + two.getStudentID();
-		this.GPA = (one.getGPA() + two.getGPA()) / 2;
+		fname = one.getName();
+		lname = two.getName();
+		stuID = one.getStudentID() + two.getStudentID();
+		GPA = (one.getGPA() + two.getGPA()) / 2;
 		if (one.getCredits() > two.getCredits()) {
-			this.credits = one.getCredits();
+			credits = one.getCredits();
 		} else {
-			this.credits = two.getCredits();
+			credits = two.getCredits();
 		}
 	}
 
