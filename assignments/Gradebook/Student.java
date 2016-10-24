@@ -74,8 +74,10 @@ public class Student {
 	}
 
 	public Double computeTuition() {
-		double tution = this.credits * 1333.33;
-		tution = Math.round(tution * 1000) / 1000.0;
+		int num_sem = credits / 15;
+		int rem_creds = credits % 15;
+		double tution = (num_sem * 20000) + (rem_creds * 1333.33);
+		Math.round(tution);
 		return tution;
 	}
 

@@ -18,16 +18,17 @@ public class Course {
 	}
 	
 	public boolean addStudent(Student s) {
-		if (rem_seats > 0){
-		for(Student temp : roster) {
-			String temp_name = temp.getName();
-			String s_name = s.getName();
-			if(!temp_name.equalsIgnoreCase(s_name)) {
-				roster.add(s);
-				this.rem_seats -= 1;
+		for (Student stu : roster) {
+			if (s.getName() == stu.getName()){
+				return false;
 			}
+			}
+		if (this.rem_seats > 0) {
+			roster.add(s);
+			this.rem_seats -= 1;
+			return true;
 		}
-		}return true; 
+		return false;
 	}
 	
 	public String generateRoster(){
@@ -40,14 +41,15 @@ public class Course {
 	}
 	
 	public Double averageGPA() {
-		int j = 0;
-		for(Student i : roster) {
-			Double iGPA = i.getGPA();
-			this.total_GPA += iGPA;
-			j = j + 1;
+		int divisor = 0;
+		for (Student s : roster) {
+			if(!s.getName().isEmpty()) {
+				divisor ++;
+				this.total_GPA += s.getGPA();
+			}
 		}
-		double avg_GPA = this.total_GPA / j;
-		return avg_GPA;
+		Math.round(this.total_GPA / divisor);
+		return this.total_GPA;
 	}
 	
 	public String toString() {
