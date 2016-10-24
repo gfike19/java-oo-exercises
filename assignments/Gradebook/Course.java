@@ -7,14 +7,14 @@ public class Course {
 	private int rem_seats;
 	private ArrayList <Student> roster = new ArrayList<Student>();
 	private int cnum;
-	private double total_GPA;
+//	private double total_GPA = 0 ; don't add stuff to a class if you don't need it
 	
 	public Course (String name, int credits, int rem_seats) {
 		this.name = name;
 		this.credits = credits;
 		this.cnum = 0;
 		this.rem_seats = rem_seats;
-		this.total_GPA = 0.0;
+//		this.total_GPA = 0.0;
 	}
 	
 	public boolean addStudent(Student s) {
@@ -40,16 +40,12 @@ public class Course {
 		return roster_str;
 	}
 	
-	public Double averageGPA() {
-		int divisor = 0;
+	public Double averageGPA() { 
+		double total_GPA = 0.0;
 		for (Student s : roster) {
-			if(!s.getName().isEmpty()) {
-				divisor ++;
-				this.total_GPA += s.getGPA();
-			}
+			total_GPA += s.getGPA();
 		}
-		Math.round(this.total_GPA / divisor);
-		return this.total_GPA;
+		return total_GPA / this.roster.size();
 	}
 	
 	public String toString() {
