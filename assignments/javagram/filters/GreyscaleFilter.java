@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import javagram.Picture;
 
-public abstract class BlurFilter implements Filter {
+public abstract class GreyscaleFilter implements Filter {
 	public Picture process(Picture original) {
 		
 		Picture processed = new Picture(original.width(), original.height());

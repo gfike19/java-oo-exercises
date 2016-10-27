@@ -41,16 +41,21 @@ public class Javagram {
 		} while(picture == null);
 		
 		// TODO - prompt user for filter and validate input
+		int choice = 0;
+		do {
 		System.out.print("Enter the number of the filter you desire: ");
 		System.out.println("1. Blue filter");
 		System.out.println("2. Invert Filter");
 		System.out.println("3. Other filter");
-		int choice = in.nextInt();
+		choice = in.nextInt();
 		try {
 			getFilter(choice);
 		} catch (IllegalArgumentException e) {
 			System.out.println("Invalid choice, select another option");
 		}
+		} while (choice == 0);
+		
+		
 		
 		// TODO - pass filter ID int to getFilter, and get an instance of Filter back 
 		Filter filter = getFilter(choice);			
@@ -88,17 +93,6 @@ public class Javagram {
 		}
 		// TODO - create some more filters, and add logic to return the appropriate one
 		ArrayList <Filter> test = new ArrayList<Filter>();
-		if (choice == 1) {
-			return getFilter(1);
-		}
-		
-		if (choice == 2) {
-			return getFilter(2);
-		}
-		
-		if (choice == 3) {
-			return getFilter(3);
-		}
 		return  test.get(choice);
 		
 	}
