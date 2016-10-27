@@ -93,8 +93,13 @@ public class Javagram {
 		}
 		// TODO - create some more filters, and add logic to return the appropriate one
 		ArrayList <Filter> test = new ArrayList<Filter>();
-		return  test.get(choice);
-		
+		BlueFilter b = new BlueFilter();
+		InvertFilter inv = new InvertFilter();
+		GreyscaleFilter g = new GreyscaleFilter();
+		test.add(b);
+		test.add(inv);
+		test.add(g);
+		return test.indexOf(choice -1);
 	}
 
 }
