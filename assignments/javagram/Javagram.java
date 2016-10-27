@@ -41,6 +41,12 @@ public class Javagram {
 		} while(picture == null);
 		
 		// TODO - prompt user for filter and validate input
+		try {
+			System.out.println("1. Blue filter");
+			System.out.println("2. Invert Filter");
+			System.out.println("3. Other filter");
+			int choice = in.nextInt();
+		}
 		
 		// TODO - pass filter ID int to getFilter, and get an instance of Filter back 
 		Filter filter = getFilter(0);			
@@ -73,7 +79,9 @@ public class Javagram {
 	// TODO - refactor this method to accept an int parameter, and return an instance of the Filter interface
 	// TODO - refactor this method to thrown an exception if the int doesn't correspond to a filter
 	private static Filter getFilter(int choice) {
-		
+		if (choice != 1 || choice != 2 || choice != 3) {
+			throw new IllegalArgumentException();
+		}
 		// TODO - create some more filters, and add logic to return the appropriate one
 		ArrayList <Filter> test = new ArrayList<Filter>();
 		return  test.get(choice);
