@@ -29,8 +29,9 @@ public class Javagram {
 				System.out.println("Image path (relative to " + dir + "):");
 				relPath = in.next();
 				
-				String[] relPathParts = relPath.split(File.separator);
-				imagePath = dir + File.separator + String.join(File.separator, Arrays.asList(relPathParts));
+//				String[] relPathParts = relPath.split(File.separator);
+//				imagePath = dir + File.separator + String.join(File.separator, Arrays.asList(relPathParts));
+				imagePath = dir + File.separator + relPath;
 				
 				picture = new Picture(imagePath);
 				
@@ -43,7 +44,7 @@ public class Javagram {
 		// TODO - prompt user for filter and validate input
 		int choice = 0;
 		do {
-		System.out.print("Enter the number of the filter you desire: ");
+		System.out.println("Enter the number of the filter you desire: ");
 		System.out.println("1. Blue filter");
 		System.out.println("2. Invert Filter");
 		System.out.println("3. Other filter");
@@ -99,7 +100,7 @@ public class Javagram {
 		test.add(b);
 		test.add(inv);
 		test.add(g);
-		return test.indexOf(choice -1);
+		return test.get(choice);
 	}
 
 }
