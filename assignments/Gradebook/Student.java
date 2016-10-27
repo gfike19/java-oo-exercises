@@ -62,24 +62,24 @@ public class Student {
 	}
 
 	public Student(Student one, Student two) {
-		fname = one.getName();
-		lname = two.getName();
-		stuID = one.getStudentID() + two.getStudentID();
-		GPA = (one.getGPA() + two.getGPA()) / 2;
+		this.fname = one.getName();
+		this.lname = two.getName();
+		this.stuID = one.getStudentID() + two.getStudentID();
+		this.GPA = (one.getGPA() + two.getGPA()) / 2;
 		if (one.getCredits() > two.getCredits()) {
-			credits = one.getCredits();
+			this.credits = one.getCredits();
 		} else {
-			credits = two.getCredits();
+			this.credits = two.getCredits();
 		}
 	}
 
-    public double computeTuition() {
-        int num_sem = credits / 15; //since a full semester is 20k
-        int extra_cred = credits % 15;
-        double tuition = num_sem * 20000;
-        tuition += (int)(1333.33 * extra_cred * 100) / 100.0;
-        return tuition;
-    }
+	public Double computeTuition() {
+		int num_sem = credits / 15;
+		int rem_creds = credits % 15;
+		double tution = (num_sem * 20000) + (rem_creds * 1333.33);
+		Math.round(tution);
+		return tution;
+	}
 
 	public Student createLegacy(Student one, Student two) {
 		Student child = new Student(one, two);

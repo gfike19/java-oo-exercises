@@ -3,6 +3,7 @@ package javagram;
 import javagram.filters.*;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -40,9 +41,19 @@ public class Javagram {
 		} while(picture == null);
 		
 		// TODO - prompt user for filter and validate input
+		System.out.print("Enter the number of the filter you desire: ");
+		System.out.println("1. Blue filter");
+		System.out.println("2. Invert Filter");
+		System.out.println("3. Other filter");
+		int choice = in.nextInt();
+		try {
+			getFilter(choice);
+		} catch (IllegalArgumentException e) {
+			System.out.println("Invalid choice, select another option");
+		}
 		
 		// TODO - pass filter ID int to getFilter, and get an instance of Filter back 
-		BlueFilter filter = getFilter();			
+		Filter filter = getFilter(choice);			
 
 		// filter and display image
 		Picture processed = filter.process(picture);
@@ -71,10 +82,24 @@ public class Javagram {
 	
 	// TODO - refactor this method to accept an int parameter, and return an instance of the Filter interface
 	// TODO - refactor this method to thrown an exception if the int doesn't correspond to a filter
-	private static BlueFilter getFilter() {
-		
+	private static Filter getFilter(int choice) {
+		if (choice != 1 || choice != 2 || choice != 3) {
+			throw new IllegalArgumentException();
+		}
 		// TODO - create some more filters, and add logic to return the appropriate one
-		return new BlueFilter();
+		ArrayList <Filter> test = new ArrayList<Filter>();
+		if (choice == 1) {
+			return getFilter(1);
+		}
+		
+		if (choice == 2) {
+			return getFilter(2);
+		}
+		
+		if (choice == 3) {
+			return getFilter(3);
+		}
+		return  test.get(choice);
 		
 	}
 
