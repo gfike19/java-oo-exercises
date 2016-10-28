@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 public class Javagram {
 
+	private static Scanner scanner;
+
 	public static void main(String[] args) {
 
 		// Create the base path for images		
@@ -27,7 +29,7 @@ public class Javagram {
 			try {
 				
 				System.out.println("Image path (relative to " + dir + "):");
-				System.out.println("Enter the name of the image you wish to filter.");
+				System.out.println("Enter the name of the image you wish to filter plus its extension");
 				relPath = in.next();
 				
 //				String[] relPathParts = relPath.split(File.separator);
@@ -44,24 +46,22 @@ public class Javagram {
 		} while(picture == null);
 		
 		// TODO - prompt user for filter and validate input
-		int choice = 0;
+		
+
+		int choice1 = 0;
 		do {
-		System.out.println("Enter the number of the filter you desire: ");
-		System.out.println("1. Blue filter");
-		System.out.println("2. Invert Filter");
-		System.out.println("3. Grayscale filter");
-		choice = in.nextInt() - 1;
+			choice1 = displayFilterMenu();
 		try {
-			getFilter(choice);
+			getFilter(choice1);
 		} catch (IllegalArgumentException e) {
 			System.out.println("Invalid choice, select another option");
 		}
-		} while (choice != 0 && choice != 1 && choice != 2);
+		} while (choice1  != 0 && choice1 != 1 && choice1 != 2);
 		
 		
 		
 		// TODO - pass filter ID int to getFilter, and get an instance of Filter back 
-		Filter filter = getFilter(choice);			
+		Filter filter = getFilter(choice1);			
 
 		// filter and display image
 		Picture processed = filter.process(picture);
@@ -69,19 +69,20 @@ public class Javagram {
 		
 		System.out.println("Image successfully filtered");
 		
+		String fileName = "";
 		// save image, if desired
-		System.out.println("Save as jpg or png file?");
-		String ext ="." + in.next();
+//		System.out.println("Save as jpg or png file?");
+//		String ext ="." + in.next();
 		System.out.println("Save image to (relative to " + dir + ") (type 'exit' to quit w/o saving):");
-		System.out.println("Enter the name you wish to save the image as");
-		String fileName = in.next();
+		System.out.println("Enter the name you wish to save the image as and its extension");
+		fileName = in.next();
+		do{
 		
 		// TODO - if the user enters the same file name as the input file, confirm that they want to overwrite the original
-		if (fileName.equalsIgnoreCase(relPath)) {
 			System.out.println("Using this name will override the current image. Continue? (Y/N)");
 			String dec = in.next();
 			if (dec.equalsIgnoreCase("y")){
-				String absFileName = dir + File.separator + fileName + ext;
+				String absFileName = dir + File.separator + fileName;
 				processed.save(absFileName);
 				System.out.println("Image saved to " + absFileName);
 			} 
@@ -89,11 +90,12 @@ public class Javagram {
 				System.out.println("Enter a different name to save the image.");
 				fileName = in.next();
 			}
-		}
+//			in.close();
+		}while (fileName.equals(relPath));
 		if (fileName.equals("exit")) {
 			System.out.println("Image not saved");
 		} else {
-			String absFileName = dir + File.separator + fileName + ext;
+			String absFileName = dir + File.separator + fileName;
 			processed.save(absFileName);
 			System.out.println("Image saved to " + absFileName);
 		}	
@@ -121,4 +123,14 @@ public class Javagram {
 			throw new IllegalArgumentException();
 		}
 		}
+	
+	private static int displayFilterMenu() {
+		System.out.println("Enter the number of the filter you desire: ");
+	System.out.println("1. Blue filter");
+	System.out.println("2. Invert Filter");
+	System.out.println("3. Grayscale filter");
+	scanner = new Scanner(System.in);
+	int choice = scanner.nextInt() - 1;
+	return choice;
+	}
 	}
