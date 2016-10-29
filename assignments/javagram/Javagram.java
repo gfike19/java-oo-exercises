@@ -56,7 +56,7 @@ public class Javagram {
 		} catch (IllegalArgumentException e) {
 			System.out.println("Invalid choice, select another option");
 		}
-		} while (choice1  != 0 && choice1 != 1 && choice1 != 2);
+		} while (choice1  != 0 && choice1 != 1 && choice1 != 2 && choice1 != 3);
 		
 		
 		
@@ -71,14 +71,11 @@ public class Javagram {
 		
 		String fileName = "";
 		// save image, if desired
-//		System.out.println("Save as jpg or png file?");
-//		String ext ="." + in.next();
 		System.out.println("Save image to (relative to " + dir + ") (type 'exit' to quit w/o saving):");
 		System.out.println("Enter the name you wish to save the image as and its extension");
 		fileName = in.next();
 		do{
 		
-		// TODO - if the user enters the same file name as the input file, confirm that they want to overwrite the original
 			System.out.println("Using this name will override the current image. Continue? (Y/N)");
 			String dec = in.next();
 			if (dec.equalsIgnoreCase("y")){
@@ -90,7 +87,6 @@ public class Javagram {
 				System.out.println("Enter a different name to save the image.");
 				fileName = in.next();
 			}
-//			in.close();
 		}while (fileName.equals(relPath));
 		if (fileName.equals("exit")) {
 			System.out.println("Image not saved");
@@ -104,19 +100,17 @@ public class Javagram {
 		in.close();
 	}
 	
-	// TODO - refactor this method to accept an int parameter, and return an instance of the Filter interface
-	// TODO - refactor this method to thrown an exception if the int doesn't correspond to a filter
 	private static Filter getFilter(int choice) {
 		ArrayList <Filter> test = new ArrayList<Filter>();
 		BlueFilter b = new BlueFilter();
 		InvertFilter inv = new InvertFilter();
 		GreyscaleFilter g = new GreyscaleFilter();
+		BlurFilter blur = new BlurFilter();
 		test.add(b);
 		test.add(inv);
 		test.add(g);
-		if (choice == 0 || choice == 1 || choice == 2) {
-			
-		// TODO - create some more filters, and add logic to return the appropriate one
+		test.add(blur);
+		if (choice <= 3 && choice > 0) {
 		return test.get(choice);
 		}
 		else {
@@ -129,6 +123,7 @@ public class Javagram {
 	System.out.println("1. Blue filter");
 	System.out.println("2. Invert Filter");
 	System.out.println("3. Grayscale filter");
+	System.out.println("4. Blur Filter");
 	scanner = new Scanner(System.in);
 	int choice = scanner.nextInt() - 1;
 	return choice;
